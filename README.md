@@ -42,7 +42,7 @@ The ES6 source code can be found in the repo in the `build/src/purecloud-platfor
 
 # Feedback
 
-This project exists to collect feedback from the community. So if you have something to say, good, bad, or otherwise, please post on the [PureCloud Developer Forum](https://developer.mypurecloud.com/forum/). If there are any build/distribution methods that you would like that haven't been implemented, please let us know what you want to see. We want to hear from you!
+This project exists to collect feedback from the community. So if you have something to say, good, bad, or otherwise, please post on the [PureCloud Developer Forum](https://developer.mypurecloud.com/forum/c/platform-api/javascript-sdk). If there are any build/distribution methods that you would like that haven't been implemented, please let us know what you want to see. We want to hear from you!
 
 Additionally, this project only intends to offer additional packaging methods for the SDK. If there are changes that change how the SDK is used, they are unintentional and should be reported on the forum. 
 
