@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AMD Test Page</title>
+	<!-- The SDK doesn't have a dependency on jQuery; just using it for this example -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Include requirejs -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+
+	<script type="text/javascript">
+/* globals requirejs */
+
+// Example config telling requirejs where superagent can be found
+requirejs.config({
+	paths: {
+		// Resolve superagent via CDN URL. It is not bundled with the AMD version of the SDK.
+		'superagent': 'https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent'
+	}
+});
+
+// NOTE: superagent must be able to be resolved via requirejs. 
+requirejs(['/build/dist/web-amd/purecloud-platform-client-v2.min.js'], (platformClient) => {
+	console.log(platformClient);
+	$(document).ready(() => {
+		// Setup
+		const client = platformClient.ApiClient.instance;
+		const usersApi = new platformClient.UsersApi();
+		client.setPersistSettings(true, 'custom_app');
+		// client.setDebugLog(console.log, 25);
+		const redirectUri = 'http://localhost:8080/examples/amd/';
+		const clientId = 'babbc081-0761-4f16-8f56-071aa402ebcb';
+		const localState = (new Date()).getTime();
+		console.log(`state=${localState}`);
+
+		// Connect
+		client.loginImplicitGrant(clientId, redirectUri, { state: localState })
+			.then((res) => {
+				console.log('logged in');
+				console.log(res);
+				console.log(res.state === localState ? 'State match' : `Different state: ${res.state}`);
+
+				// Get logged in user's info
+				return usersApi.getUsersMe();
+			})
+			.then((res) => {
+				$('body').append($('<pre>').text(JSON.stringify(res, null, 2)));
+			})
+			.catch((err) => {
+				// Handle failure response
+				console.log(err);
+			});
+	});
+});
+	</script>
+</head>
+<body>
+	<h1>AMD Test Page</h1>
+</body>
+</html>
