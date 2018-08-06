@@ -18,7 +18,7 @@ class App extends Component {
 		const usersApi = new platformClient.UsersApi();
 		client.setPersistSettings(true, 'custom_app');
 		// client.setDebugLog(console.log, 25);
-		const redirectUri = 'http://localhost:8080/examples/amd/';
+		const redirectUri = 'http://localhost:3000/';
 		const clientId = 'babbc081-0761-4f16-8f56-071aa402ebcb';
 		const localState = (new Date()).getTime();
 		console.log(`state=${localState}`);
